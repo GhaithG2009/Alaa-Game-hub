@@ -80,3 +80,7 @@ img.slopeimg {
  
   width: 320px;
 }
+
+html{
+  scroll-behavior: smooth;
+}
