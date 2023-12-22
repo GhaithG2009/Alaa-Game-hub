@@ -110,3 +110,19 @@ h1{
     color: #b6caff;
     margin: 0 10px 10px 20px;
 }
+
+img.gamedownloadImg{
+  border-radius: 10px;
+  border: 1px solid rgb(103, 54, 216) ;
+ 
+ }
+ img.gamedownloadImg:hover{
+   border: 2px solid rgb(145, 103, 243);
+ }
+ 
+
+ img.gamedownloadImg {
+   height: 180px;
+  
+   width: 320px;
+ }
