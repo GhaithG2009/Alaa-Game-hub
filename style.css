@@ -82,7 +82,7 @@ img.gamedownloadImg{
 
 
  nav {
-  background-color: #5018aa;
+  background-color: #210352;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -101,7 +101,7 @@ img.gamedownloadImg{
 }
 
 .logo-text {
-  color: #b6caff;
+  color: #ab62ff;
   font-size: 1.2em;
   font-weight: bold;
 }
@@ -119,7 +119,7 @@ nav li {
 }
 
 nav a {
-  color: #b6caff;
+  color: #ab62ff;
   text-decoration: none;
   padding: 10px;
   transition: background-color 0.3s;
@@ -127,7 +127,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #873cff;
+  background-color: #461891;
 }
 
 /* Dropdown styles */
@@ -136,7 +136,7 @@ nav ul ul {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #333;
+  background-color: #210352;
   border-radius: 0 0 4px 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
