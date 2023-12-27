@@ -10,17 +10,18 @@
 
 
     <style>
-        /* Style your fullscreen button as needed */
-        #fullscreenButton {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          padding: 10px;
-          background-color: #3498db;
-          color: #fff;
-          border: none;
-          cursor: pointer;
-        }
+    #fullscreenButton {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 10px;
+      background-color: #af8cff; /* Light Purple */
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease; /* Add smooth transition */
+      border-radius: 8px; /* Rounded corners */
+    }
       </style>
 
       
@@ -28,25 +29,30 @@
 <body>
     <iframe id="iframehtml5" width="100%" height="800px" src="https://play.famobi.com/wrapper/backgammon-classic/A1000-10" frameborder="0"  scrolling="no" class="iframe-default " allowfullscreen></iframe>
     <div class="backgammon">
-        <button id="fullscreenButton" onclick="toggleFullscreen()">Fullscreen</button>
+      <button id="fullscreenButton" onclick="toggleFullscreen()">
+        <!-- Improved SVG representation of an enlarge icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+          <path d="M20 20H4V4h8V2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-8h-2v8zM14 0v2h4.59L8.7 14.89l1.41 1.41L20 3.41V8h2V0c0-1.1-.9-2-2-2H14z"/>
+        </svg>
+      </button>
         <a href="index.html">EXIT</a>
     </div>
 
 
 
     <script>
-        // Function to toggle fullscreen
-        function toggleFullscreen() {
-          var iframe = document.querySelector('iframe');
-    
-          if (!document.fullscreenElement) {
-            iframe.requestFullscreen().catch(err => {
-              console.error('Error attempting to enable fullscreen:', err);
-            });
-          } else {
-            document.exitFullscreen();
-          }
+      // Function to toggle fullscreen
+      function toggleFullscreen() {
+        var iframe = document.querySelector('iframe');
+  
+        if (!document.fullscreenElement) {
+          iframe.requestFullscreen().catch(err => {
+            console.error('Error attempting to enable fullscreen:', err);
+          });
+        } else {
+          document.exitFullscreen();
         }
-      </script>
+      }
+    </script>
 </body>
 </html>
