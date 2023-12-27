@@ -5,11 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>backgammon</title>
     <link rel="stylesheet" href="backgammon.css">
+
+
+
+
+    <style>
+        /* Style your fullscreen button as needed */
+        #fullscreenButton {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          padding: 10px;
+          background-color: #3498db;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+      </style>
+
+      
 </head>
 <body>
-    <iframe id="iframehtml5" width="100%" height="800px" src="https://play.famobi.com/wrapper/backgammon-classic/A1000-10" frameborder="0"  scrolling="no" class="iframe-default " allowfullscreen=""></iframe>
+    <iframe id="iframehtml5" width="100%" height="800px" src="https://play.famobi.com/wrapper/backgammon-classic/A1000-10" frameborder="0"  scrolling="no" class="iframe-default " allowfullscreen></iframe>
     <div class="backgammon">
+        <button id="fullscreenButton" onclick="toggleFullscreen()">Fullscreen</button>
         <a href="index.html">EXIT</a>
     </div>
+
+
+
+    <script>
+        // Function to toggle fullscreen
+        function toggleFullscreen() {
+          var iframe = document.querySelector('iframe');
+    
+          if (!document.fullscreenElement) {
+            iframe.requestFullscreen().catch(err => {
+              console.error('Error attempting to enable fullscreen:', err);
+            });
+          } else {
+            document.exitFullscreen();
+          }
+        }
+      </script>
 </body>
 </html>
