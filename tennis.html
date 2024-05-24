@@ -86,6 +86,60 @@ setInterval(() => {
     onGameStateChange(gameState);
 }, 5000); // Change game state every 5 seconds for demonstration
 
+
+
+
+
+
+
+if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/service-worker.js')
+          .then(function(registration) {
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          })
+          .catch(function(err) {
+              console.error('ServiceWorker registration failed: ', err);
+          });
+      });
+  }
+
+  // Define the cache name
+  var CACHE_NAME = 'ghaith-gamehub-cache';
+
+  // Define the URLs to be cached
+  var urlsToCache = [
+    '/',
+    '/style.css',
+    // Add more URLs as needed
+  ];
+
+  // Install the service worker and cache assets
+  self.addEventListener('install', function(event) {
+    event.waitUntil(
+      caches.open(CACHE_NAME)
+        .then(function(cache) {
+          console.log('Opened cache');
+          return cache.addAll(urlsToCache);
+        })
+    );
+  });
+
+  // Fetch assets from the cache
+  self.addEventListener('fetch', function(event) {
+    event.respondWith(
+      caches.match(event.request)
+        .then(function(response) {
+          // Cache hit - return response from cache
+          if (response) {
+            return response;
+          }
+
+          // Not found in cache - fetch from network
+          return fetch(event.request);
+        })
+    );
+  });
       </script>
 </body>
 </html>
