@@ -56,6 +56,35 @@
             document.exitFullscreen();
           }
         }
+
+
+        // Function to save the game state and send it to the parent
+function saveGameState(gameState) {
+    window.parent.postMessage({ type: 'save', gameState: gameState }, '*');
+}
+
+// Listen for messages from the parent window
+window.addEventListener('message', function(event) {
+    if (event.data.type === 'load') {
+        var gameState = event.data.gameState;
+        // Restore the game state
+        console.log("Loaded game state:", gameState);
+        // Add your game state loading logic here
+    }
+});
+
+// Example function to call saveGameState when the game state changes
+function onGameStateChange(newState) {
+    saveGameState(newState);
+}
+
+// Simulate game state changes and saving
+setInterval(() => {
+    // Simulate a game state change
+    const gameState = { score: Math.floor(Math.random() * 100) };
+    onGameStateChange(gameState);
+}, 5000); // Change game state every 5 seconds for demonstration
+
       </script>
 </body>
 </html>
