@@ -43,7 +43,66 @@
             </button>
         <a href="index.html">EXIT</a>
     </div>
+
+
+    <div class="comment-section">
+      <h2>Comments and Reviews</h2>
+      <form id="commentForm">
+          <label for="username">Name:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="comment">Comment:</label>
+          <textarea id="comment" name="comment" required></textarea>
+          <button type="submit">Submit</button>
+      </form>
+      <div id="commentsContainer"></div>
+  </div>
+  
+
     <script>
+
+// Handle comment form submission
+document.getElementById('commentForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const comment = document.getElementById('comment').value;
+    
+    if (username && comment) {
+        const commentContainer = document.getElementById('commentsContainer');
+        
+        const newComment = document.createElement('div');
+        newComment.classList.add('comment');
+        
+        const nameElement = document.createElement('h4');
+        nameElement.textContent = username;
+        
+        const commentElement = document.createElement('p');
+        commentElement.textContent = comment;
+        
+        newComment.appendChild(nameElement);
+        newComment.appendChild(commentElement);
+        
+        commentContainer.appendChild(newComment);
+        
+        document.getElementById('commentForm').reset();
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // Function to toggle fullscreen
         function toggleFullscreen() {
           var iframe = document.querySelector('iframe');
