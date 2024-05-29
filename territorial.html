@@ -61,32 +61,59 @@
     <script>
 
 // Handle comment form submission
-document.getElementById('commentForm').addEventListener('submit', function(event) {
+// Handle comment form submission
+document.getElementById('commentForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     
     const username = document.getElementById('username').value;
     const comment = document.getElementById('comment').value;
     
     if (username && comment) {
-        const commentContainer = document.getElementById('commentsContainer');
-        
-        const newComment = document.createElement('div');
-        newComment.classList.add('comment');
-        
-        const nameElement = document.createElement('h4');
-        nameElement.textContent = username;
-        
-        const commentElement = document.createElement('p');
-        commentElement.textContent = comment;
-        
-        newComment.appendChild(nameElement);
-        newComment.appendChild(commentElement);
-        
-        commentContainer.appendChild(newComment);
-        
-        document.getElementById('commentForm').reset();
+        try {
+            const response = await fetch('/api/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, comment })
+            });
+            
+            if (response.ok) {
+                // Comment successfully added, update UI or fetch all comments again
+                fetchComments();
+                document.getElementById('commentForm').reset();
+            } else {
+                // Handle error
+                console.error('Failed to add comment');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 });
+
+// Function to fetch comments from the backend
+async function fetchComments() {
+    try {
+        const response = await fetch('/api/comments');
+        const comments = await response.json();
+        
+        // Update UI with fetched comments
+        const commentsContainer = document.getElementById('commentsContainer');
+        commentsContainer.innerHTML = '';
+        comments.forEach(comment => {
+            const newComment = document.createElement('div');
+            newComment.classList.add('comment');
+            newComment.innerHTML = `<h4>${comment.username}</h4><p>${comment.comment}</p>`;
+            commentsContainer.appendChild(newComment);
+        });
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+    }
+}
+
+// Fetch comments when the page loads
+window.addEventListener('load', fetchComments);
 
 
 
