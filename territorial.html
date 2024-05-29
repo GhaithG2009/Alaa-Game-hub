@@ -45,56 +45,75 @@
     </div>
 
 
-    <div class="comment-section">
+    <div id="comments">
       <h2>Comments and Reviews</h2>
+
+      <!-- Form to submit new comment -->
       <form id="commentForm">
-          <label for="username">Name:</label>
-          <input type="text" id="username" name="username" required>
-          <label for="comment">Comment:</label>
-          <textarea id="comment" name="comment" required></textarea>
+          <label for="name">Name:</label>
+          <input type="text" id="name" required><br>
+          <label for="comment">Comment:</label><br>
+          <textarea id="comment" rows="4" cols="50" required></textarea><br>
           <button type="submit">Submit</button>
       </form>
-      <div id="commentsContainer"></div>
-  </div>
-  
+
+      <!-- Section to display existing comments -->
+      <div id="commentsList">
+          <!-- Comments will be dynamically added here -->
+      </div>
+  </div>  
 
     <script>
 
-document.getElementById('commentForm').addEventListener('submit', async function(event) {
+
+
+
+// Array to store comments
+let comments = [];
+
+// Function to display comments
+function displayComments() {
+    const commentsContainer = document.getElementById('comments');
+    commentsContainer.innerHTML = '';
+
+    comments.forEach(comment => {
+        const commentDiv = document.createElement('div');
+        commentDiv.innerHTML = `
+            <p><strong>${comment.name}</strong></p>
+            <p>${comment.comment}</p>
+            <hr>
+        `;
+        commentsContainer.appendChild(commentDiv);
+    });
+}
+
+// Function to handle form submission
+document.getElementById('commentForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    
-    const username = document.getElementById('username').value;
+
+    // Get values from form
+    const name = document.getElementById('name').value;
     const comment = document.getElementById('comment').value;
-    
-    if (username && comment) {
-        try {
-            const response = await fetch('/api/comments', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, comment })
-            });
-            
-            if (response.ok) {
-                // Comment successfully added, update UI or fetch all comments again
-                fetchComments();
-                document.getElementById('commentForm').reset();
-            } else {
-                // Handle error
-                console.error('Failed to add comment:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error adding comment:', error);
-        }
-    } else {
-        console.error('Username and comment are required');
-    }
+
+    // Create new comment object
+    const newComment = {
+        name: name,
+        comment: comment
+    };
+
+    // Add new comment to array
+    comments.push(newComment);
+
+    // Display comments
+    displayComments();
+
+    // Clear form fields
+    document.getElementById('name').value = '';
+    document.getElementById('comment').value = '';
 });
 
-
-
-
+// Initial display of comments
+displayComments();
 
 
 
