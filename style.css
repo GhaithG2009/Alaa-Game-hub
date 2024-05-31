@@ -178,4 +178,11 @@ body {
 
 
 
-
+.ads-section {
+  /* Add your desired styles for the ads section */
+  margin: 20px 0; /* Adjust margin as needed */
+  padding: 20px; /* Adjust padding as needed */
+  background-color: #412b64; /* Background color for the ads section */
+  height: 50px;
+  border: 1px #7474748a;
+}
