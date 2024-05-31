@@ -177,26 +177,3 @@ body {
 
 
 
-
-
-.left-sidebar,
-.right-sidebar {
-    width: 25%; /* Adjust width as needed */
-    float: left;
-    padding: 20px;
-}
-
-/* Styling for the left and right ad containers */
-.ad {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.ad-left {
-    /* Additional styles for left ad container */
-}
-
-.ad-right {
-    /* Additional styles for right ad container */
-}
