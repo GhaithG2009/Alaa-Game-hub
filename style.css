@@ -177,26 +177,3 @@ body {
 
 
 
-.container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.left-ad, .right-ad {
-  width: 120px; /* Adjust width as needed */
-  position: fixed;
-  top: 0;
-}
-
-.left-ad {
-  left: 0;
-}
-
-.right-ad {
-  right: 0;
-}
-
-.content {
-  flex-grow: 1;
-  /* Add styles for your main content */
-}
