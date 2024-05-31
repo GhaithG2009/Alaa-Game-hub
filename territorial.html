@@ -61,59 +61,10 @@
       <div id="commentsList">
           <!-- Comments will be dynamically added here -->
       </div>
-  </div>
+  </div>  
 
     <script>
 
-
-
-
-// Array to store comments
-let comments = [];
-
-// Function to display comments
-function displayComments() {
-    const commentsContainer = document.getElementById('comments');
-    commentsContainer.innerHTML = '';
-
-    comments.forEach(comment => {
-        const commentDiv = document.createElement('div');
-        commentDiv.innerHTML = `
-            <p><strong>${comment.name}</strong></p>
-            <p>${comment.comment}</p>
-            <hr>
-        `;
-        commentsContainer.appendChild(commentDiv);
-    });
-}
-
-// Function to handle form submission
-document.getElementById('commentForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    // Get values from form
-    const name = document.getElementById('name').value;
-    const comment = document.getElementById('comment').value;
-
-    // Create new comment object
-    const newComment = {
-        name: name,
-        comment: comment
-    };
-
-    // Add new comment to array
-    comments.push(newComment);
-
-    // Display comments
-    displayComments();
-
-    // Clear form fields
-    document.getElementById('name').value = '';
-    document.getElementById('comment').value = '';
-});
-
-// Initial display of comments
-displayComments();
 
 
 
