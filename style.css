@@ -186,3 +186,13 @@ body {
   height: 50px;
   border: 1px #7474748a;
 }
+
+
+
+
+.ad-section img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
