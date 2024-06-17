@@ -185,6 +185,10 @@ body {
   background-color: #412b64; /* Background color for the ads section */
   height: 50px;
   border: 1px #7474748a;
+
+  text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
 }
 
 
