@@ -117,7 +117,103 @@
     <button onclick="updateFile('style.css', editor2)">Update style.css</button>
 
     <script>
-       const token="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",owner="GhaithG2009",repo="Ghaith-Gamehub";let editor1,editor2;async function fetchFileContent(e,t){let o=`https://api.github.com/repos/${owner}/${repo}/contents/${e}`;try{let n=await fetch(o,{headers:{Authorization:`token ${token}`}});if(n.ok){let i=await n.json(),r=atob(i.content);t.setValue(r)}else alert("Error fetching file content.")}catch(a){console.error("Error fetching file content:",a),alert("Error fetching file content.")}finally{document.getElementById("loader").style.display="none"}}async function updateFile(e,t){let o=btoa(t.getValue()),n=`https://api.github.com/repos/${owner}/${repo}/contents/${e}`;try{let i=await fetch(n,{headers:{Authorization:`token ${token}`}});if(!i.ok){alert("Error fetching file SHA.");return}let r=await i.json(),a=r.sha,s=`https://api.github.com/repos/${owner}/${repo}/contents/${e}`,l=await fetch(s,{method:"PUT",headers:{Authorization:`token ${token}`,"Content-Type":"application/json"},body:JSON.stringify({message:"Update file via website",content:o,sha:a})});l.ok?alert("File updated successfully!"):alert("Error updating file.")}catch(c){console.error("Error updating file:",c),alert("Error updating file.")}}require.config({paths:{vs:"https://unpkg.com/monaco-editor@0.30.1/min/vs"}}),require(["vs/editor/editor.main"],function(){editor1=monaco.editor.create(document.getElementById("editor-container1"),{value:"",language:"html",theme:"vs-dark"}),editor2=monaco.editor.create(document.getElementById("editor-container2"),{value:"",language:"css",theme:"vs-dark"}),fetchFileContent("index.html",editor1),fetchFileContent("style.css",editor2)});
+       // Replace with your GitHub PAT, username, repository
+       const token = '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'; // **Important: Don't expose this in production!**
+        const owner = 'GhaithG2009'; // Your GitHub username
+        const repo = 'Ghaith-Gamehub'; // Your repository name
+
+        let editor1, editor2;
+
+        // Initialize Monaco Editor for both editors
+        require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@0.30.1/min/vs' } });
+        require(['vs/editor/editor.main'], function () {
+            editor1 = monaco.editor.create(document.getElementById('editor-container1'), {
+                value: '',
+                language: 'html',
+                theme: 'vs-dark'
+            });
+            editor2 = monaco.editor.create(document.getElementById('editor-container2'), {
+                value: '',
+                language: 'css', // Set to CSS for the second editor
+                theme: 'vs-dark'
+            });
+            fetchFileContent('index.html', editor1);
+            fetchFileContent('style.css', editor2);
+        });
+
+        // Function to fetch the current content of the file
+        async function fetchFileContent(filePath, editor) {
+            const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+            
+            try {
+                const response = await fetch(getUrl, {
+                    headers: {
+                        'Authorization': `token ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const content = atob(data.content); // Decode Base64 content
+                    editor.setValue(content);
+                } else {
+                    alert('Error fetching file content.');
+                }
+            } catch (error) {
+                console.error('Error fetching file content:', error);
+                alert('Error fetching file content.');
+            } finally {
+                document.getElementById('loader').style.display = 'none';
+            }
+        }
+
+        // Function to update the file with new content
+        async function updateFile(filePath, editor) {
+            const content = btoa(editor.getValue()); // Encode content to Base64
+            const message = 'Update file via website'; // Commit message
+
+            // Fetch the current file SHA
+            const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+            try {
+                const getResponse = await fetch(getUrl, {
+                    headers: {
+                        'Authorization': `token ${token}`
+                    }
+                });
+
+                if (!getResponse.ok) {
+                    alert('Error fetching file SHA.');
+                    return;
+                }
+
+                const getData = await getResponse.json();
+                const sha = getData.sha;
+
+                // Update the file
+                const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+                const putResponse = await fetch(putUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        content: content,
+                        sha: sha
+                    })
+                });
+
+                if (putResponse.ok) {
+                    alert('File updated successfully!');
+                } else {
+                    alert('Error updating file.');
+                }
+            } catch (error) {
+                console.error('Error updating file:', error);
+                alert('Error updating file.');
+            }
+        
     </script>
 </body>
 </html>
